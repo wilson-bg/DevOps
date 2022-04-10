@@ -1,3 +1,4 @@
+from email import message
 import string
 from flask import Blueprint, request
 from src.connections.db_connection import DBConnection
@@ -15,15 +16,21 @@ blacklists_api = Blueprint('blacklists_api', __name__)
 @jwt_required()
 def registrar_email(db_connection: DBConnection):
     
-    email = request.json["email"]
-    app_uuid = request.json["app_uuid"]
-    blocked_reason = request.json["blocked_reason"]
-    
-    data = BckList(email = email, app_uuid = app_uuid , blocked_reason = blocked_reason)
-    db_connection.db.session.add(data)
-    db_connection.db.session.commit()    
-    return {"state": "success", "data" : bck_convertir(data)}
-
+    try:
+        email = request.json["email"]
+        app_uuid = request.json["app_uuid"]
+        blocked_reason = request.json["blocked_reason"]
+        
+        if not email or not app_uuid or email is None or app_uuid is None:
+            return {"message":"Oops, hubo un error ","state": "failed", "error": "El email y app_uuid son obligatorios"}, 400
+        
+        data = BckList(email = email, app_uuid = app_uuid , blocked_reason = blocked_reason)
+        db_connection.db.session.add(data)
+        db_connection.db.session.commit()    
+        return {"state": "success", "data" : bck_convertir(data)}
+    except Exception as e:
+        print(e)
+        return {"message":"Oops, hubo un error ","state": "failed", "error":str(e)}, 400
 
 
 
