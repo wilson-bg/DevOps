@@ -10,7 +10,7 @@ blacklists_api = Blueprint('blacklists_api', __name__)
 
 
 # Permite agregar un email a la lista negra global de la organización.
-@blacklists_api.route('/', methods=['POST'])
+@blacklists_api.route('', methods=['POST'])
 @inject
 @jwt_required()
 def registrar_email(db_connection: DBConnection):

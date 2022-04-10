@@ -13,7 +13,7 @@ def instantiate_db(db) -> None:
     """
     try:
         db.create_all()
-        #data = BckList(email = "1@1.1", app_uuid = uuid.uuid4(), blocked_reason = "*****")
+        #data = BckList(email = "prueba@prueba.com", app_uuid = uuid.uuid4(), blocked_reason = "spam")
         #db.session.add(data)
         #db.session.commit()
         

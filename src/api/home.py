@@ -24,5 +24,5 @@ home_api = Blueprint('home_api', __name__)
 def home(db_connection: DBConnection):
     uid = uuid.uuid4().hex
     token_de_acceso = create_access_token(identity = 4)
-    return {"message":"---", "state": "success", "uuid": str(uid), "token": token_de_acceso}
+    return {"uuid": str(uid), "token": token_de_acceso}
     #return {"state": "success", "running host": socket.gethostname(), "dn:":socket.getfqdn()}, 200

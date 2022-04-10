@@ -10,7 +10,8 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{host}}"
+				"url": "{{host}}",
+				"description": "Permite obtener un nuevo token"
 			},
 			"response": []
 		},
@@ -25,7 +26,8 @@
 						"type": "text"
 					}
 				],
-				"url": "{{host}}/blacklists/prueba@prueba.com"
+				"url": "{{host}}/blacklists/{{email}}",
+				"description": "Permite saber si un email está en la lista negra global de la organización o no, y el motivo  \npor el que fue agregado a la lista negra."
 			},
 			"response": []
 		},
@@ -33,30 +35,27 @@
 			"name": "blacklists-POST",
 			"request": {
 				"auth": {
-					"type": "bearer",
-					"bearer": {
-						"token": "{{token}}"
-					}
+					"type": "noauth"
 				},
 				"method": "POST",
 				"header": [
 					{
 						"key": "Authorization",
 						"value": "{{token}}",
-						"type": "text",
-						"disabled": true
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n \"email\": \"prueba@prueba.com\",\r\n \"app_uuid\": \"84c0141aff6a4275abd9f54f2eee2e1f\",\r\n \"blocked_reason\":\"blocked_reason\"\r\n}",
+					"raw": "{\r\n \"email\": \"prueba@prueba.com\",\r\n \"app_uuid\": \"84c0141aff6a4275abd9f54f2eee2e1f\",\r\n \"blocked_reason\":\"spam\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "{{host}}/blacklists/r"
+				"url": "{{host}}/blacklists",
+				"description": "Permite agregar un email a la lista negra global de la organización"
 			},
 			"response": []
 		}
@@ -84,12 +83,17 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "http://192.168.0.186:5000",
+			"value": "<<host>>",
 			"type": "string"
 		},
 		{
 			"key": "token",
-			"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY0OTU0ODM4MSwianRpIjoiNTM5ODg4NDQtYzY5OC00MGVhLThmMDEtYzhjNmE1ZmFiZTI0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6NCwibmJmIjoxNjQ5NTQ4MzgxLCJleHAiOjE2NDk1NDkyODF9.DMXhCyL6J9Q6kXzi_6mOHQs27wc6xr12K1XXOxCEppA",
+			"value": "Bearer <<JWT>>",
+			"type": "string"
+		},
+		{
+			"key": "email",
+			"value": "<<email>>",
 			"type": "string"
 		}
 	]
