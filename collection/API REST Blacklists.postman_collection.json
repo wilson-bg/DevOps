@@ -32,22 +32,6 @@
 			"response": []
 		},
 		{
-			"name": "Reports email",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "{{token}}",
-						"type": "text"
-					}
-				],
-				"url": "{{host}}/blacklists/{{email}}/reports",
-				"description": "Permite saber si un email está en la lista negra global de la organización o no, y el motivo  \npor el que fue agregado a la lista negra."
-			},
-			"response": []
-		},
-		{
 			"name": "Registrar email",
 			"request": {
 				"auth": {

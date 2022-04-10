@@ -51,7 +51,7 @@ def consultar_email(email:string,db_connection: DBConnection):
     if len(result) == 0 :
         return {"message": "Data not found"}, 404
     else :
-            return { "message": "Reported email" }
+            return { "message": "Reported email", "result" : bck_convertir_arreglo(result)  }
     
 
 
