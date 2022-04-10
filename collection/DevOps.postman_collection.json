@@ -1,0 +1,96 @@
+{
+	"info": {
+		"_postman_id": "3bec5572-d0ec-4ca4-9c5d-178e08db7c3b",
+		"name": "DevOps",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{host}}"
+			},
+			"response": []
+		},
+		{
+			"name": "blacklists-GET",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": "{{host}}/blacklists/prueba@prueba.com"
+			},
+			"response": []
+		},
+		{
+			"name": "blacklists-POST",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{token}}"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"email\": \"prueba@prueba.com\",\r\n \"app_uuid\": \"84c0141aff6a4275abd9f54f2eee2e1f\",\r\n \"blocked_reason\":\"blocked_reason\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{host}}/blacklists/r"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://192.168.0.186:5000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY0OTU0ODM4MSwianRpIjoiNTM5ODg4NDQtYzY5OC00MGVhLThmMDEtYzhjNmE1ZmFiZTI0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6NCwibmJmIjoxNjQ5NTQ4MzgxLCJleHAiOjE2NDk1NDkyODF9.DMXhCyL6J9Q6kXzi_6mOHQs27wc6xr12K1XXOxCEppA",
+			"type": "string"
+		}
+	]
+}

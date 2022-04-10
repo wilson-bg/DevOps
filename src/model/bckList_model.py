@@ -12,3 +12,10 @@ class  BckList(Base):
     blocked_reason = Column(String(512), nullable=False)
 
 pydantic_parser = sqlalchemy_to_pydantic(BckList)
+
+def bck_convertir_arreglo(arreglo):
+    return list(map(bck_convertir, arreglo))
+
+def bck_convertir(fila):
+    return pydantic_parser.from_orm(fila).dict()
+    
