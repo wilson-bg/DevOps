@@ -34,7 +34,7 @@ def registrar_email(db_connection: DBConnection):
 
 
 
-# Consulta de 
+# Consulta email
 @blacklists_api.route('/<email>', methods=['GET'])
 @inject
 @jwt_required()
@@ -46,9 +46,24 @@ def consultar_email(email:string,db_connection: DBConnection):
     
     if len(result) == 0 :
         return {"message": "Data not found"}, 404
+    else :
+            return { "message": "Reported email" }
+    
+
+
+
+# Consulta emails
+@blacklists_api.route('/<email>/reports', methods=['GET'])
+@inject
+@jwt_required()
+def consultar_lista_reportes(email:string,db_connection: DBConnection):
+    try:
+        result = db_connection.db.session.query(BckList).filter(BckList.email == email).all()
+    except NoResultFound:
+        return {"message": "Data not found"}, 404
+    
+    if len(result) == 0 :
+        return {"message": "Data not found"}, 404
     
     #return bck_convertir_arreglo(result),200    
     return { "data": bck_convertir_arreglo(result) }
-
-
-
