@@ -1,3 +1,3 @@
 from .base import Base
-from .bckList_model import BckList
+from .bckList_model import BlackList
 

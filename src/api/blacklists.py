@@ -1,10 +1,11 @@
 from email import message
+from ipaddress import ip_address
 import string
 from flask import Blueprint, request
 from src.connections.db_connection import DBConnection
 from injector import inject
 from sqlalchemy.exc import NoResultFound
-from src.model.bckList_model import BckList, bck_convertir, bck_convertir_arreglo, pydantic_parser
+from src.model.bckList_model import BlackList, bck_convertir, bck_convertir_arreglo, pydantic_parser
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 blacklists_api = Blueprint('blacklists_api', __name__)
@@ -21,10 +22,13 @@ def registrar_email(db_connection: DBConnection):
         app_uuid = request.json["app_uuid"]
         blocked_reason = request.json["blocked_reason"]
         
+        if len(blocked_reason)>255:
+            return {"message":"Oops, hubo un error ","state": "failed", "error": "El campo blocked_reason supera el máximo permitido de 255 caracteres"}, 400
+        
         if not email or not app_uuid or email is None or app_uuid is None:
             return {"message":"Oops, hubo un error ","state": "failed", "error": "El email y app_uuid son obligatorios"}, 400
         
-        data = BckList(email = email, app_uuid = app_uuid , blocked_reason = blocked_reason)
+        data = BlackList(email = email, app_uuid = app_uuid , blocked_reason = blocked_reason, ip_address = request.remote_addr)
         db_connection.db.session.add(data)
         db_connection.db.session.commit()    
         return {"state": "success", "data" : bck_convertir(data)}
@@ -40,7 +44,7 @@ def registrar_email(db_connection: DBConnection):
 @jwt_required()
 def consultar_email(email:string,db_connection: DBConnection):
     try:
-        result = db_connection.db.session.query(BckList).filter(BckList.email == email).all()
+        result = db_connection.db.session.query(BlackList).filter(BlackList.email == email).all()
     except NoResultFound:
         return {"message": "Data not found"}, 404
     
@@ -58,7 +62,7 @@ def consultar_email(email:string,db_connection: DBConnection):
 @jwt_required()
 def consultar_lista_reportes(email:string,db_connection: DBConnection):
     try:
-        result = db_connection.db.session.query(BckList).filter(BckList.email == email).all()
+        result = db_connection.db.session.query(BlackList).filter(BlackList.email == email).all()
     except NoResultFound:
         return {"message": "Data not found"}, 404
     

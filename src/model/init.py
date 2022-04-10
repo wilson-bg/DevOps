@@ -1,5 +1,5 @@
 from sqlalchemy.exc import IntegrityError
-from src.model.bckList_model import BckList
+from src.model.bckList_model import BlackList
 import uuid
 
 def instantiate_db(db) -> None:
@@ -13,7 +13,7 @@ def instantiate_db(db) -> None:
     """
     try:
         db.create_all()
-        #data = BckList(email = "prueba@prueba.com", app_uuid = uuid.uuid4(), blocked_reason = "spam")
+        #data = BlackList(email = "prueba@prueba.com", app_uuid = uuid.uuid4(), blocked_reason = "spam")
         #db.session.add(data)
         #db.session.commit()
         

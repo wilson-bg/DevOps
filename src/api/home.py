@@ -6,7 +6,7 @@ from flask_jwt_extended import create_access_token
 from src.connections.db_connection import DBConnection
 from injector import inject
 from sqlalchemy.exc import NoResultFound
-from src.model.bckList_model import BckList, pydantic_parser
+from src.model.bckList_model import BlackList, pydantic_parser
 from flask_jwt_extended import jwt_required, get_jwt_identity
 #import socket
 import uuid
