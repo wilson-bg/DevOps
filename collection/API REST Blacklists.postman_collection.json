@@ -83,7 +83,7 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "http://blacklists-env.eba-qrpesn5n.us-east-1.elasticbeanstalk.com/",
+			"value": "http://blacklists-container-env.eba-uyz6egbx.us-east-1.elasticbeanstalk.com/",
 			"type": "string"
 		},
 		{
