@@ -47,7 +47,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n \"email\":\"prueba@prueba.com\",\r\n \"app_uuid\": \"84c0141aff6a4275abd9f54f2eee2e1f\",\r\n \"blocked_reason\":\"spam\"\r\n}",
+					"raw": "{\r\n \"email\":\"{{email}}\",\r\n \"app_uuid\": \"84c0141aff6a4275abd9f54f2eee2e1f\",\r\n \"blocked_reason\":\"spam\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -56,6 +56,24 @@
 				},
 				"url": "{{host}}/blacklists",
 				"description": "Permite agregar un email a la lista negra global de la organización"
+			},
+			"response": []
+		},
+		{
+			"name": "LB",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{host}}"
+			},
+			"response": []
+		},
+		{
+			"name": "Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{host}}/health/ping"
 			},
 			"response": []
 		}
@@ -83,7 +101,7 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "http://blacklists-container-env.eba-uyz6egbx.us-east-1.elasticbeanstalk.com/",
+			"value": "<<host>>",
 			"type": "string"
 		},
 		{
